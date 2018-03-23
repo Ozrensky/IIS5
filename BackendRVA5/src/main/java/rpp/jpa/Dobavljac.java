@@ -2,6 +2,10 @@ package rpp.jpa;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
 
@@ -11,6 +15,7 @@ import java.util.List;
  */
 @Entity
 @NamedQuery(name="Dobavljac.findAll", query="SELECT d FROM Dobavljac d")
+@JsonIgnoreProperties({"hibernateLazyInitalizer", "handler"})
 public class Dobavljac implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -27,6 +32,7 @@ public class Dobavljac implements Serializable {
 
 	//bi-directional many-to-one association to Porudzbina
 	@OneToMany(mappedBy="dobavljac")
+	@JsonIgnore
 	private List<Porudzbina> porudzbinas;
 
 	public Dobavljac() {
